@@ -62,11 +62,9 @@ fn main() {
         .expect("Failed to find libpcre pkg-config");
 
     //println!("cargo:rustc-link-lib=static={}", "/usr/lib/x86_64-linux-gnu/libm-2.36.a");
-    println!("cargo:rustc-link-lib=dylib=m");
-    if cfg!(feature = "test") {
-        println!("cargo:rustc-link-arg=-Wl,--allow-multiple-definition");
-    }
-    println!("cargo:warning=This is a debug message. {}", babeltrace_path.display());
+    //println!("cargo:rustc-link-lib=dylib=m");
+    println!("cargo:rustc-link-arg=-Wl,--allow-multiple-definition");
+
     println!(
         "cargo:rustc-link-search=native={}/lib",
         babeltrace_path.display()
@@ -101,7 +99,7 @@ fn main() {
         "cargo:rustc-link-search=native={}",
         glib2.link_paths[0].display()
     );
-    println!("cargo:rustc-link-lib=dylib={}", glib2.libs[0]);
+    println!("cargo:rustc-link-lib=gmodule-2.0");
     println!(
         "cargo:rustc-link-search=native={}",
         pcre.link_paths[0].display()
@@ -109,4 +107,5 @@ fn main() {
     println!("cargo:rustc-link-lib=dylib={}", pcre.libs[0]);
 
     println!("cargo:rustc-link-lib=dylib=c");
+    println!("cargo:rustc-link-lib=dylib=m");
 }

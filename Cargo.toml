@@ -11,10 +11,6 @@ license = "MIT"
 repository = "https://github.com/auxoncorp/babeltrace2-sys"
 documentation = "https://docs.rs/babeltrace2-sys"
 
-[target.x86_64-unknown-linux-gnu]
-linker = "gcc"
-rustflags = ["-C", "link-arg=-lm"]
-
 [features]
 test = []
 

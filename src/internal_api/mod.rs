@@ -273,9 +273,9 @@ impl Drop for BoxedRawMsgIterState {
 /// Returns the next byte buffer to be used by the binary file
 /// reader to deserialize binary data
 extern "C" fn msg_iter_request_bytes(
-    request_sz: ffi::size_t,
+    request_sz: usize,
     buffer_addr: *mut *mut u8,
-    buffer_sz: *mut ffi::size_t,
+    buffer_sz: *mut usize,
     data: *mut c_void,
 ) -> ffi::ctf_msg_iter_medium_status::Type {
     if data.is_null() {
@@ -305,7 +305,7 @@ extern "C" fn msg_iter_request_bytes(
         ffi::ctf_msg_iter_medium_status::CTF_MSG_ITER_MEDIUM_STATUS_EOF
     } else {
         debug_assert!(state.packet_size > state.read_index);
-        let max_len = cmp::min(request_sz as usize, state.packet_size - state.read_index);
+        let max_len = cmp::min(request_sz, state.packet_size - state.read_index);
         let start = unsafe { state.packet.add(state.read_index) };
         unsafe {
             *buffer_addr = start as *mut _; // msg_iter doesn't modify buffer but isn't const in the decl
