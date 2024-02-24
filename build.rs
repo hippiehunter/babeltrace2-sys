@@ -17,6 +17,7 @@ fn main() {
     }
 
     let mut config = autotools::Config::new("vendor/babeltrace");
+    //config.arg("--verbose");
     config.reconf("-vif");
     config.enable("built-in-plugins", None);
     config.enable("silent-rules", None);
@@ -29,8 +30,9 @@ fn main() {
     config.disable("dependency-tracking", None);
     config.disable_shared();
     config.enable_static();
+//    println!("building");
     config.fast_build(true);
-
+  //  println!("built");
     if cfg!(debug_assertions) {
         config.enable("asan", None);
         config.env("BABELTRACE_DEV_MODE", "1");
@@ -59,10 +61,12 @@ fn main() {
         .probe("libpcre")
         .expect("Failed to find libpcre pkg-config");
 
+    //println!("cargo:rustc-link-lib=static={}", "/usr/lib/x86_64-linux-gnu/libm-2.36.a");
+    println!("cargo:rustc-link-lib=dylib=m");
     if cfg!(feature = "test") {
         println!("cargo:rustc-link-arg=-Wl,--allow-multiple-definition");
     }
-
+    println!("cargo:warning=This is a debug message. {}", babeltrace_path.display());
     println!(
         "cargo:rustc-link-search=native={}/lib",
         babeltrace_path.display()
@@ -92,17 +96,17 @@ fn main() {
         "cargo:rustc-link-search=native={}",
         gmod2.link_paths[0].display()
     );
-    println!("cargo:rustc-link-lib=static={}", gmod2.libs[0]);
+    println!("cargo:rustc-link-lib=dylib={}", gmod2.libs[0]);
     println!(
         "cargo:rustc-link-search=native={}",
         glib2.link_paths[0].display()
     );
-    println!("cargo:rustc-link-lib=static={}", glib2.libs[0]);
+    println!("cargo:rustc-link-lib=dylib={}", glib2.libs[0]);
     println!(
         "cargo:rustc-link-search=native={}",
         pcre.link_paths[0].display()
     );
-    println!("cargo:rustc-link-lib=static={}", pcre.libs[0]);
+    println!("cargo:rustc-link-lib=dylib={}", pcre.libs[0]);
 
     println!("cargo:rustc-link-lib=dylib=c");
 }
