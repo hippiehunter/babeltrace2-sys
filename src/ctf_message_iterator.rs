@@ -9,7 +9,6 @@ pub struct CtfMessageIterator {
 }
 
 impl CtfMessageIterator {
-    #[allow(dead_code)]
     pub fn new(log_level: LoggingLevel, params: &CtfPluginSourceFsInitParams) -> BtResult<Self> {
         let mut pipeline = CommonPipeline::new(log_level, params)?;
 
@@ -56,11 +55,11 @@ impl CtfMessageIterator {
             }
         }
     }
-    #[allow(dead_code)]
+
     pub fn trace_properties(&self) -> &TraceProperties {
         &self.pipeline.proxy_state.as_ref().trace_properties
     }
-    #[allow(dead_code)]
+
     pub fn stream_properties(&self) -> &BTreeSet<StreamProperties> {
         &self.pipeline.proxy_state.as_ref().stream_properties
     }

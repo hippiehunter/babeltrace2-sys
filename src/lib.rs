@@ -54,6 +54,7 @@ pub use graph::*;
 pub use logger::*;
 pub use message::*;
 pub use message_iterator::*;
+pub use ctf_message_iterator::*;
 pub use plugin::*;
 pub use port::*;
 pub use proxy_plugin::*;
