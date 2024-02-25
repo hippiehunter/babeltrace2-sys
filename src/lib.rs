@@ -38,6 +38,7 @@ mod utils_plugin;
 mod value;
 
 pub mod internal_api;
+mod ctf_message_iterator;
 
 pub use clock::*;
 pub use component::*;
