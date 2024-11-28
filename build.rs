@@ -100,6 +100,7 @@ fn main() {
         glib2.link_paths[0].display()
     );
     println!("cargo:rustc-link-lib=gmodule-2.0");
+    println!("cargo:rustc-link-lib=glib-2.0");
     println!(
         "cargo:rustc-link-search=native={}",
         pcre.link_paths[0].display()

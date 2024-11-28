@@ -4,7 +4,6 @@
 #[allow(non_upper_case_globals)]
 #[allow(non_camel_case_types)]
 #[allow(non_snake_case)]
-//#[allow(unaligned_references)] // bindgen generated tests, https://github.com/rust-lang/rust-bindgen/issues/1651
 #[allow(deref_nullptr)]
 mod bindings;
 
@@ -38,7 +37,6 @@ mod utils_plugin;
 mod value;
 
 pub mod internal_api;
-mod ctf_message_iterator;
 
 pub use clock::*;
 pub use component::*;
@@ -54,7 +52,6 @@ pub use graph::*;
 pub use logger::*;
 pub use message::*;
 pub use message_iterator::*;
-pub use ctf_message_iterator::*;
 pub use plugin::*;
 pub use port::*;
 pub use proxy_plugin::*;
